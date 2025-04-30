@@ -16,7 +16,7 @@
   },
   "scripts": {
     "wdio": "npm run clean && wdio run ./wdio.conf.ts && npm run report",
-    "clean": "shx rm -rf allure-results/* screenshots/* logs/*",
+    "clean": "rimraf allure-results/* screenshots/* logs/* videos/*",
     "report": "allure serve"
   },
   "dependencies": {

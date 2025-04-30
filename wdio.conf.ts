@@ -142,7 +142,7 @@ export const config: WebdriverIO.Config = {
         ['video', {
             saveAllVideos: false,       // true = all tests, false = only failed tests
             videoSlowdownMultiplier: 3, // slow down video for better visibility
-            outputDir: './videos',      // where videos are saved
+            outputDir: './video',      // where videos are saved
           }],
         ['allure', 
         {outputDir: 'allure-results',
@@ -319,7 +319,7 @@ afterTest: async function (test, context, { error, result, duration, passed, ret
     const logFilePath = path.resolve(process.cwd(), `./logs/wdio-${process.env.WDIO_WORKER_ID}-winston.log`);
     const rawLogFilePath = path.resolve(process.cwd(), `./logs/wdio-${process.env.WDIO_WORKER_ID}.log`);
     const screenshotPath = path.resolve(process.cwd(), `./screenshots/wdio-${process.env.WDIO_WORKER_ID}.png`);
-    const videoPath = path.resolve(process.cwd(), `./videos/${test.title}.mp4`);
+    const videoPath = path.resolve(process.cwd(), `./video/${test.title}.mp4`);
 
     // Attach Winston log if it exists
     if (fs.existsSync(logFilePath)) {
