@@ -1,6 +1,8 @@
 
 import * as os from "os";
-import { addAttachment } from "@wdio/allure-reporter";
+import { addAttachment, Status } from "@wdio/allure-reporter";
+import allure from '@wdio/allure-reporter';
+
 import * as fs from "fs";
 import * as path from"path";
 
@@ -58,13 +60,33 @@ export const config: WebdriverIO.Config = {
     // https://saucelabs.com/platform/platform-configurator
     //
     capabilities: [
-        {
-        browserName: 'chrome'
-         }
-    // ,
-    //  {
-    //     browserName: 'firefox'
-    // }
+        // {
+        //     browserName: 'chrome',
+        //     browserVersion: '135.0.7049.115',
+        //     acceptInsecureCerts: true,
+        //     'goog:chromeOptions': {
+        //     args: [
+        //         '--disable-infobars',
+        //         '--disable-extensions',
+        //         '--no-sandbox',
+        //         '--disable-gpu'
+        //     ]
+        //     }
+        // },
+        // ],
+                // args: [
+                //     '--disable-infobars',
+                //     '--disable-extensions',
+                //     '--no-sandbox',
+                //     '--disable-gpu'
+                // ]
+    //         }
+    //     }
+    // ],
+    // // ,
+     {
+        browserName: 'firefox'
+    }
      ],
 
     //
@@ -140,7 +162,7 @@ export const config: WebdriverIO.Config = {
     // see also: https://webdriver.io/docs/dot-reporter
     reporters: [
         ['video', {
-            saveAllVideos: true,       // true = all tests, false = only failed tests
+            saveAllVideos: false,       // true = all tests, false = only failed tests
             videoSlowdownMultiplier: 3, // slow down video for better visibility
             outputDir: './video',      // where videos are saved
           }],
@@ -225,7 +247,11 @@ export const config: WebdriverIO.Config = {
      * @param {object}         browser      instance of created browser/device session
      */
     before: async function (capabilities, specs) {
-        await browser.maximizeWindow();
+    // await browser.execute(() => {
+    //     document.body.style.zoom = "70%";
+    // });
+    await browser.maximizeWindow();
+
     },
     /**
      * Runs before a WebdriverIO command gets executed.
@@ -267,90 +293,52 @@ export const config: WebdriverIO.Config = {
      * @param {boolean} result.passed    true if test has passed, otherwise false
      * @param {object}  result.retries   information about spec related retries, e.g. `{ attempts: 0, limit: 0 }`
      */
-    // afterTest: async function(test, context, { error, result, duration, passed, retries }) {
 
-    //     const logFilePath = fs.readFileSync(`../../logs/wdio-${process.env.WDIO_WORKER_ID}winston.log`);
-    //     if (fs.existsSync(logFilePath)) {
-    //         const content = fs.readFileSync(logFilePath, 'utf8');
-    //         addAttachment('Execution Log', content, 'text/plain');
-    //     }
-
-    //     addAttachment("WDIO logs", fs.readFileSync(`./logs/wdio-${process.env.WDIO_WORKER_ID}.log`), "text/plain");
-    //     await browser.saveScreenshot(`./screenshots/wdio-${process.env.WDIO_WORKER_ID}.png`);
-    //     addAttachment("ScreenShots", fs.readFileSync(`./screenshots/wdio-${process.env.WDIO_WORKER_ID}.png`), "image/png");
-    //     if (!passed) {
-    //         await browser.takeScreenshot();
-    //     }
-    // },
-
-
-    // afterTest: async function (test, context, { error, result, duration, passed, retries }) {
-    //     const logFilePath = `./logs/wdio-${process.env.WDIO_WORKER_ID}-winston.log`;
-    //     const rawLogFilePath =  `./logs/wdio-${process.env.WDIO_WORKER_ID}.log`;
-    //     const screenshotPath =  `./screenshots/wdio-${process.env.WDIO_WORKER_ID}.png`;
+    afterTest: async function (test, context, { error, result, duration, passed, retries }) {
+        const logFilePath = path.resolve(process.cwd(), `./logs/wdio-${process.env.WDIO_WORKER_ID}-winston.log`);
+        const rawLogFilePath = path.resolve(process.cwd(), `./logs/wdio-${process.env.WDIO_WORKER_ID}.log`);
+        const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
+        const screenshotPath = path.resolve(process.cwd(), `./screenshots/wdio-${process.env.WDIO_WORKER_ID}-${timestamp}.png`);
+        const videoPath = path.resolve(process.cwd(), `./video/${process.env.WDIO_WORKER_ID}-${timestamp}.mp4`);
     
-    //     // Attach Winston log if it exists
-    //     if (fs.readFileSync(logFilePath)) {
-    //         const content = fs.readFileSync(logFilePath, 'utf8');
-    //         addAttachment('Execution Log', content, 'text/plain');
-    //     }
+        // Wrap all in a single Allure step
+        await browser.call(async () => {
+            await allure.startStep('Attaching test artifacts');
     
-    //     // Attach WDIO log if it exists
-    //     if (fs.readFileSync(rawLogFilePath)) {
-    //         const content = fs.readFileSync(rawLogFilePath, 'utf8');
-    //         addAttachment('WDIO logs', content, 'text/plain');
-    //     }
+            const contentType = {
+                TEXT: 'text/plain',
+                PNG: 'image/png',
+                MP4: 'video/mp4'
+            };
+
+            if (fs.existsSync(logFilePath)) {
+                const content = fs.readFileSync(logFilePath, 'utf8');
+                addAttachment('Execution Log', content, contentType.TEXT);
+            }
     
-    //     // Save and attach screenshot
-    //     await browser.saveScreenshot(screenshotPath);
-    //     if (fs.readFileSync(screenshotPath)) {
-    //         const image = fs.readFileSync(screenshotPath);
-    //         addAttachment('Screenshot', image, 'image/png');
-    //     }
+            if (fs.existsSync(rawLogFilePath)) {
+                const content = fs.readFileSync(rawLogFilePath, 'utf8');
+                addAttachment('WDIO logs', content, contentType.TEXT);
+            }
     
-    //     // Take extra screenshot on failure
-    //     if (!passed) {
-    //         await browser.takeScreenshot();
-    //     }
-    // }
+            await browser.saveScreenshot(screenshotPath);
+            if (fs.existsSync(screenshotPath)) {
+                const image = fs.readFileSync(screenshotPath);
+                addAttachment('Screenshot', image, contentType.PNG);
+            }
     
-
-afterTest: async function (test, context, { error, result, duration, passed, retries }) {
-    const logFilePath = path.resolve(process.cwd(), `./logs/wdio-${process.env.WDIO_WORKER_ID}-winston.log`);
-    const rawLogFilePath = path.resolve(process.cwd(), `./logs/wdio-${process.env.WDIO_WORKER_ID}.log`);
-    const screenshotPath = path.resolve(process.cwd(), `./screenshots/wdio-${process.env.WDIO_WORKER_ID}.png`);
-    const videoPath = path.resolve(process.cwd(), `./video/${process.env.WDIO_WORKER_ID}.mp4`);
-
-    // Attach Winston log if it exists
-    if (fs.existsSync(logFilePath)) {
-        const content = fs.readFileSync(logFilePath, 'utf8');
-        addAttachment('Execution Log', content, 'text/plain');
-    }
-
-    // Attach WDIO log if it exists
-    if (fs.existsSync(rawLogFilePath)) {
-        const content = fs.readFileSync(rawLogFilePath, 'utf8');
-        addAttachment('WDIO logs', content, 'text/plain');
-    }
-
-    // Save and attach screenshot
-    await browser.saveScreenshot(screenshotPath);
-    if (fs.existsSync(screenshotPath)) {
-        const image = fs.readFileSync(screenshotPath);
-        addAttachment('Screenshot', image, 'image/png');
-    }
-
-    //attach video
-        if (fs.existsSync(videoPath)) {
-            const video = fs.readFileSync(videoPath);
-            addAttachment('Test Video', video, 'video/mp4');
+            if (fs.existsSync(videoPath)) {
+                const video = fs.readFileSync(videoPath);
+                addAttachment('Test Video', video, contentType.MP4); // Allure may preview only on supported viewers
+            }
+            allure.endStep();
+        });
+    
+        // Optional extra screenshot on failure
+        if (!passed) {
+            await browser.takeScreenshot();
         }
-
-    // Take extra screenshot on failure
-    if (!passed) {
-        await browser.takeScreenshot();
     }
-}
     /**
      * Hook that gets executed after the suite has ended
      * @param {object} suite suite details

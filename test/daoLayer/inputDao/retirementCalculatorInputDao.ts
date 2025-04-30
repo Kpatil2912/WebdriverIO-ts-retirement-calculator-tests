@@ -5,30 +5,34 @@ export class RetirementCalculatorInputDao {
   private readonly retirementAge: string;
   private readonly currentIncome: string;
   private readonly spouseIncome: string;
-  private readonly savings?: string;
-  private readonly contribution?: string;
-  private readonly increaseRate?: string;
-  private readonly socialSecurityOverride?: string;
-  private readonly additionalIncome?: string;
-  private readonly retirementYears?: string;
-  private readonly incomeDesired?: string;
-  private readonly preReturn?: string;
-  private readonly postReturn?: string;
+  private readonly savings: string;
+  private readonly contribution: string;
+  private readonly increaseRate: string;
+  private readonly socialSecurityBenfits: string;
+  private readonly socialSecurityOverride: string;
+  private readonly additionalIncome: string;
+  private readonly retirementYears: string;
+  private readonly incomeDesired: string;
+  private readonly preReturn: string;
+  private readonly postReturn: string;
+  private readonly maritalStatus: string;
 
   constructor(data: RetirementFormDataLayer) {
     this.currentAge = data.currentAge;
     this.retirementAge = data.retirementAge;
-    this.currentIncome = data.currentIncome ?? '';
+    this.currentIncome = data.currentIncome ;
     this.spouseIncome = data.spouseIncome ?? '';
     this.savings = data.savings;
     this.contribution = data.contribution;
     this.increaseRate = data.increaseRate;
+    this.socialSecurityBenfits = data.socialSecurityBenfits;
     this.socialSecurityOverride = data.socialSecurityOverride;
     this.additionalIncome = data.additionalIncome;
     this.retirementYears = data.retirementYears;
     this.incomeDesired = data.incomeDesired;
     this.preReturn = data.preReturn;
     this.postReturn = data.postReturn;
+    this.maritalStatus = data.maritalStatus;
   }
 
   public getCurrentAge() { return this.currentAge; }
@@ -38,10 +42,13 @@ export class RetirementCalculatorInputDao {
   public getSavings() { return this.savings; }
   public getContribution() { return this.contribution; }
   public getIncreaseRate() { return this.increaseRate; }
+  public getSocialSecurityBenfits() { return this.socialSecurityBenfits; }
   public getSocialSecurityOverride() { return this.socialSecurityOverride; }
   public getAdditionalIncome() { return this.additionalIncome; }
   public getRetirementYears() { return this.retirementYears; }
   public getIncomeDesired() { return this.incomeDesired; }
   public getPreReturn() { return this.preReturn; }
   public getPostReturn() { return this.postReturn; }
+  public getMaritalStatus() { return this.maritalStatus; }
+
 }

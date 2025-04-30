@@ -4,46 +4,36 @@ import { getTestData } from "../util/fileUtil";
 import { RetirementFormDataLayer } from "../dataLayer/retirementFormDataLayer";
 import { RetirementCalculatorInputDao } from "../daoLayer/inputDao/retirementCalculatorInputDao";
 import logger from "../util/logger";
+import allureReporter from '@wdio/allure-reporter';
 
 describe('Retirement Calculator - Form Validation Tests', () => {
+    allureReporter.addFeature('Retirement Calculator');
 
     it('should submit form with all required fields filled', async () => {
-        logger.info('Test case started: should submit form with all required fields filled');
 
-        try {
+        logger.info('Test case started: should submit form with all required fields filled');
+        allureReporter.addStory('Form Validation');
+        allureReporter.addSeverity('critical');
+        allureReporter.startStep('Test case started: should submit form with all required fields filled');
+
             // Test Data
-            logger.info('Fetching test data from file');
             const testDataFilePath = path.join(process.cwd(), "/test/testData/testData.json");
             const retirementFormData = getTestData(testDataFilePath, "retirementFormData");
             const validRetirementFormData: RetirementFormDataLayer = retirementFormData["validData"];
-            logger.info('Test data successfully fetched and parsed');
 
             // Data Layer
-            logger.info('Initializing RetirementCalculatorInputDao with valid test data');
             const retirementCalculatorInputDao: RetirementCalculatorInputDao = new RetirementCalculatorInputDao(validRetirementFormData);
 
             // Page Objects
-            logger.info('Initializing RetirementCalculatorPage');
             const retirementCalculatorPage: RetirementCalculatorPage = new RetirementCalculatorPage();
 
             // Test Logic
-            logger.info('Opening Retirement Calculator URL');
             await (await retirementCalculatorPage.openURL()).acceptCookiesIfPresent();
-            logger.info('Cookies accepted if present');
-
-            logger.info('Filling the retirement calculator form with valid data');
-            await retirementCalculatorPage.fillForm(retirementCalculatorInputDao);
-
-            logger.info('Form filled successfully. Proceeding with further test logic');
-            // Add further assertions based on expected outcome
-            // e.g., expect($('.result')).toBeExisting();
-
-            logger.info('Test case completed successfully: should submit form with all required fields filled');
+            allureReporter.startStep('Filling the retirement calculator form with valid data');
+            await(await retirementCalculatorPage.fillForm(retirementCalculatorInputDao)).clickOnCalculate();
             
-        } catch (error) {
-            logger.error('An error occurred during the test execution', error);
-            throw error; // Re-throw the error to ensure the test fails
-        }
+            allureReporter.endStep();
+            logger.info('Test case completed successfully: should submit form with all required fields filled');        
     });
 
 });

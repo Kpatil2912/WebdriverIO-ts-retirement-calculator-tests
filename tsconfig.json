@@ -27,5 +27,5 @@
     "include": [
         "test",
         "wdio.conf.ts"
-, "archive/test.e2e.ts"    ]
+, "archive/test.e2e.ts", "archive/secure.page.ts", "archive/login.page.ts"    ]
 }
