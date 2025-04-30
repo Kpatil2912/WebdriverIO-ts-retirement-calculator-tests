@@ -40,7 +40,7 @@ coverage/
 *.bak
 
 # Videos folder for test runs
-/videos/
+/video/
 
 # Screenshots folder for test runs
 /screenshots/
