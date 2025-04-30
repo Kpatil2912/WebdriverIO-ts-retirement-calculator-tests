@@ -1,6 +1,6 @@
 
 import * as os from "os";
-import { addAttachment, Status } from "@wdio/allure-reporter";
+import { addAttachment } from "@wdio/allure-reporter";
 import allure from '@wdio/allure-reporter';
 
 import * as fs from "fs";
@@ -301,7 +301,6 @@ export const config: WebdriverIO.Config = {
         const screenshotPath = path.resolve(process.cwd(), `./screenshots/wdio-${process.env.WDIO_WORKER_ID}-${timestamp}.png`);
         const videoPath = path.resolve(process.cwd(), `./video/${process.env.WDIO_WORKER_ID}-${timestamp}.mp4`);
     
-        // Wrap all in a single Allure step
         await browser.call(async () => {
             await allure.startStep('Attaching test artifacts');
     
@@ -334,7 +333,6 @@ export const config: WebdriverIO.Config = {
             allure.endStep();
         });
     
-        // Optional extra screenshot on failure
         if (!passed) {
             await browser.takeScreenshot();
         }

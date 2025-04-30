@@ -52,11 +52,9 @@ export default class RetirementCalculatorPage extends Page {
         await this.setElementValue(this.currentTotalSaving(), retirementCalculatorInputDao.getSavings());
         await this.setElementValue(this.currentAnnualSaving(), retirementCalculatorInputDao.getContribution());
         await this.setElementValue(this.savingsIncreaseRate(), retirementCalculatorInputDao.getIncreaseRate());
-
         await this.clickWhenVisible(this.socialBenefitsRadioButton(retirementCalculatorInputDao.getSocialSecurityBenfits()));
         await this.clickWhenVisible(this.maritalStatusRadioButton(retirementCalculatorInputDao.getMaritalStatus()));
         await this.setElementValue(this.socialSecurityOverride(), retirementCalculatorInputDao.getSocialSecurityOverride());
-
         logger.info("Form filled.");   
         return this
     }
@@ -75,12 +73,12 @@ export default class RetirementCalculatorPage extends Page {
     }
 
     public async acceptCookiesIfPresent() {
-            logger.info("Checking for cookie banner.");
-            if (await this.acceptCookiesButton().isExisting()) {
-                await this.acceptCookiesButton().click();
-                logger.info("Cookies accepted successfully.");
-            } else {
-                logger.info("No cookie banner found.");
-            }
+        logger.info("Checking for cookie banner.");
+        if (await this.acceptCookiesButton().isExisting()) {
+        await this.acceptCookiesButton().click();
+        logger.info("Cookies accepted successfully.");
+        } else {
+        logger.info("No cookie banner found.");
+        }
     }
 }

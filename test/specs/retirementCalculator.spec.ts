@@ -22,7 +22,8 @@ describe('Retirement Calculator - Form Validation Tests', () => {
             const validRetirementFormData: RetirementFormDataLayer = retirementFormData["validData"];
 
             // Data Layer
-            const retirementCalculatorInputDao: RetirementCalculatorInputDao = new RetirementCalculatorInputDao(validRetirementFormData);
+            const retirementCalculatorInputDao: RetirementCalculatorInputDao = 
+                    new RetirementCalculatorInputDao(validRetirementFormData);
 
             // Page Objects
             const retirementCalculatorPage: RetirementCalculatorPage = new RetirementCalculatorPage();
