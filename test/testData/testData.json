@@ -1,0 +1,27 @@
+{
+  "retirementFormData": {
+    "validData": {
+      "currentAge": "40",
+      "retirementAge": "68",
+      "currentIncome": "100000",
+      "spouseIncome": "75000",
+      "savings": "500000",
+      "contribution": "10",
+      "increaseRate": "0.25",
+      "socialSecurityOverride": "4000",
+      "additionalIncome": "500",
+      "retirementYears": "20",
+      "incomeDesired": "75",
+      "preReturn": "8",
+      "postReturn": "5"
+    },
+    "invalidAgeData": {
+      "currentAge": "70",
+      "retirementAge": "65"
+    },
+    "invalidTypeData": {
+      "currentAge": "twenty",
+      "retirementAge": "thirty"
+    }
+  }
+}
