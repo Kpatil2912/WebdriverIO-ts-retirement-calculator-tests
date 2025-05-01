@@ -53,13 +53,15 @@ export const config: WebdriverIO.Config = {
     // and 30 processes will get spawned. The property handles how many capabilities
     // from the same test should run tests.
     //
-    maxInstances: 1,
+    //maxInstances: 4,
     //
     // If you have trouble getting all important capabilities together, check out the
     // Sauce Labs platform configurator - a great tool to configure your capabilities:
     // https://saucelabs.com/platform/platform-configurator
     //
     capabilities: [
+
+
         // {
         //     browserName: 'chrome',
         //     browserVersion: '135.0.7049.115',
@@ -73,6 +75,9 @@ export const config: WebdriverIO.Config = {
         //     ]
         //     }
         // },
+
+
+
         // ],
                 // args: [
                 //     '--disable-infobars',
@@ -84,10 +89,27 @@ export const config: WebdriverIO.Config = {
     //     }
     // ],
     // // ,
+
+
      {
         browserName: 'firefox',
         browserVersion: 'stable',
+        // maxInstances: 4, // Removed as it is not a valid property for RequestedStandaloneCapabilities
+        'moz:firefoxOptions': {
+      args: [
+       // '-headless', // Run Firefox in headless mode for faster execution
+       // '--window-size=1920,1080', // Set browser window size
+        // '--disable-gpu', // Disable GPU acceleration
+        // '--no-sandbox', // Disable sandboxing (useful in CI environments)
+        // '--disable-extensions' // Disable browser extensions
+      ],
+      // Optional: Specify Firefox binary path if needed
+      // binary: '/path/to/firefox'
     }
+    }
+
+
+
      ],
 
     //

@@ -9,6 +9,7 @@
       "contribution": "10",
       "increaseRate": "6",
       "socialSecurityBenfits": "yes",
+      "noSocialSecurityBenfits": "no",
       "maritalStatus" :"married",
       "socialSecurityOverride": "4000",
       "additionalIncome": "500",

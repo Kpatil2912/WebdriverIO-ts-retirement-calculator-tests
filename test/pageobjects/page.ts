@@ -46,11 +46,14 @@ export class Page {
   async isVisible(
     element: ChainablePromiseElement,
   ): Promise<boolean> {
-    await element.scrollIntoView({ block: 'center' });
-    await element.waitForDisplayed({ });
-    return await element.isDisplayed();
+    try {
+      await element.scrollIntoView({ block: 'center' });
+    await element.waitForDisplayed({ timeout : 1000});
+      return await element.isDisplayed();
+          } catch (error) {
+            return false;
+          }
   }
-
 
 // Retrieves the text content of an element
   async getElementText(element: ChainablePromiseElement): Promise<string> {

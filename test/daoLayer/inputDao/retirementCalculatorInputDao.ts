@@ -10,6 +10,7 @@ export class RetirementCalculatorInputDao {
   private readonly increaseRate: string;
   private readonly socialSecurityBenfits: string;
   private readonly socialSecurityOverride: string;
+  private readonly noSocialSecurityBenfits: string;
   private readonly additionalIncome: string;
   private readonly retirementYears: string;
   private readonly incomeDesired: string;
@@ -28,6 +29,7 @@ export class RetirementCalculatorInputDao {
     this.contribution = data.contribution;
     this.increaseRate = data.increaseRate;
     this.socialSecurityBenfits = data.socialSecurityBenfits;
+    this.noSocialSecurityBenfits = data.noSocialSecurityBenfits;
     this.socialSecurityOverride = data.socialSecurityOverride;
     this.additionalIncome = data.additionalIncome;
     this.retirementYears = data.retirementYears;
@@ -47,6 +49,7 @@ export class RetirementCalculatorInputDao {
   public getContribution() { return this.contribution; }
   public getIncreaseRate() { return this.increaseRate; }
   public getSocialSecurityBenfits() { return this.socialSecurityBenfits; }
+  public getNoSocialSecurityBenfits() { return this.noSocialSecurityBenfits; }
   public getSocialSecurityOverride() { return this.socialSecurityOverride; }
   public getAdditionalIncome() { return this.additionalIncome; }
   public getRetirementYears() { return this.retirementYears; }

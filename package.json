@@ -16,7 +16,9 @@
   },
   "scripts": {
     "wdio": "npm run clean && wdio run ./wdio.conf.ts",
+    "test:debug": "npm run clean && wdio run ./wdio.conf.ts && npm run report",
     "test": "npm run clean && wdio run ./wdio.conf.ts && npm run report",
+
     "clean": "rimraf allure-results/* screenshots/* logs/* videos/*",
     "report": "allure serve"
   },

@@ -8,6 +8,7 @@ export interface RetirementFormDataLayer {
   increaseRate: string;
   socialSecurityBenfits :string;
   socialSecurityOverride: string;
+  noSocialSecurityBenfits: string;
   additionalIncome: string;
   retirementYears: string;
   incomeDesired: string;

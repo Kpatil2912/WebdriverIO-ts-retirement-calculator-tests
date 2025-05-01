@@ -25,6 +25,10 @@ describe('Retirement Calculator - Form Validation Tests', () => {
     // Page Objects Layer
     const retirementCalculatorPage: RetirementCalculatorPage = new RetirementCalculatorPage();
     
+    // beforeAll(async () => {
+    //     await (await retirementCalculatorPage.openURL()).acceptCookiesIfPresent();
+    // });
+
     it('Should submit form with all required fields filled', async () => {
 
         logger.info('Test case started: should submit form with all required fields filled');
@@ -33,7 +37,7 @@ describe('Retirement Calculator - Form Validation Tests', () => {
         allureReporter.startStep('Test case started: should submit form with all required fields filled');
 
         // Test Logic
-        await (await retirementCalculatorPage.openURL()).acceptCookiesIfPresent();
+        await ((await retirementCalculatorPage.openURL()).acceptCookies());
         await (await retirementCalculatorPage.fillForm(retirementCalculatorInputDao)).clickOnCalculate();
 
         //Verification Layer
@@ -53,7 +57,7 @@ describe('Retirement Calculator - Form Validation Tests', () => {
         allureReporter.startStep('Test case started: should display error when submitting form without filling required fields');
 
         // Test Logic
-        await (await retirementCalculatorPage.openURL()).acceptCookiesIfPresent();
+        await ((await retirementCalculatorPage.openURL()).acceptCookies());
         await retirementCalculatorPage.clickOnCalculate();
 
         // Verification Layer
@@ -65,4 +69,42 @@ describe('Retirement Calculator - Form Validation Tests', () => {
         logger.info('Test case completed successfully: should display error when submitting form without filling required fields');
     });
 
+    it('should hide Social Security Override input when toggle is No', async () => {
+        logger.info('Test case started: should hide Social Security Override input when toggle is No');
+        allureReporter.addStory('Form Validation');
+        allureReporter.addSeverity('critical');
+        allureReporter.startStep('Test case started: should hide Social Security Override input when toggle is No');
+
+        // Test Logic
+        await (await (await retirementCalculatorPage.openURL()).acceptCookies());
+        await retirementCalculatorPage.clickOnNoSocialBenefitsRadioButton(retirementCalculatorInputDao); 
+        const isVisible = await retirementCalculatorPage.isOverrideVisible();
+
+        // Verification Layer
+        allureReporter.startStep('Validating that Social Security Override input is hidden');
+        console.log(retirementCalculatorPage.isOverrideVisible());
+        expect(isVisible).toBeFalse();
+        allureReporter.endStep();
+
+        logger.info('Test case completed successfully: should hide Social Security Override input when toggle is No');
+    });
+
+    it('should show Social Security Override input when toggle is Yes', async () => {
+        logger.info('Test case started: should show Social Security Override input when toggle is Yes');
+        allureReporter.addStory('Form Validation');
+        allureReporter.addSeverity('critical');
+        allureReporter.startStep('Test case started: should show Social Security Override input when toggle is Yes');
+
+        // Test Logic
+        await (await retirementCalculatorPage.openURL()).acceptCookies();
+        await retirementCalculatorPage.clickOnSocialBenefitsRadioButton(retirementCalculatorInputDao); 
+        const isVisible = await retirementCalculatorPage.isOverrideVisible();
+
+        // Verification Layer
+        allureReporter.startStep('Validating that Social Security Override input is visible');
+        expect(isVisible).toBeTrue();
+        allureReporter.endStep();
+
+        logger.info('Test case completed successfully: should show Social Security Override input when toggle is Yes');
+    });
 });
