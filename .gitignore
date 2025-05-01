@@ -1,0 +1,46 @@
+# Node dependencies
+node_modules/
+package-lock.json
+
+# Build output
+dist/
+build/
+out/
+
+# WebdriverIO logs and error screenshots
+logs/
+errorShots/
+
+# Allure report folders
+allure-results/
+allure-report/
+
+# TypeScript cache
+*.tsbuildinfo
+
+# Environment files
+.env
+.env.local
+
+# IDE files
+.vscode/
+.idea/
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Coverage reports
+coverage/
+.nyc_output/
+
+# Temporary files
+*.log
+*.tmp
+*.bak
+
+# Videos folder for test runs
+/video/
+
+# Screenshots folder for test runs
+/screenshots/
