@@ -2,9 +2,10 @@ import { ChainablePromiseElement } from 'webdriverio';
 import { Page } from './page';
 import { RetirementCalculatorInputDao } from '../daoLayer/inputDao/retirementCalculatorInputDao';
 import logger from "../util/logger";
+import allureReporter from '@wdio/allure-reporter';
 
 export default class RetirementCalculatorPage extends Page {
-
+    
     private currentAge(): ChainablePromiseElement {
         return $("#current-age");
     }
@@ -41,10 +42,20 @@ export default class RetirementCalculatorPage extends Page {
     private acceptCookiesButton(): ChainablePromiseElement {
         return $("//button[text()='Accept all cookies']");
     }
+    private resultsChartGrapth(): ChainablePromiseElement {
+        return $("#results-chart");
+    }
+    private resultsHeader(): ChainablePromiseElement {
+        return $(`//h3[text()='Results']`);
+    }
+    private calculatorInputAlert(): ChainablePromiseElement {
+        return $(`#calculator-input-alert-desc`);
+    }
     private retirementCalculatorPageutl: string = 'insights-tools/retirement-calculator.html';
     
     public async fillForm(retirementCalculatorInputDao: RetirementCalculatorInputDao) : Promise<this> {
         logger.info("Filling the retirement calculator form with provided input data.");
+        allureReporter.startStep('Filling the retirement calculator form with valid data');
         await this.setElementValue(this.currentAge(), retirementCalculatorInputDao.getCurrentAge());
         await this.setElementValue(this.retirementAge(), retirementCalculatorInputDao.getRetirementAge());
         await this.setElementValue(this.currentAnnualIncome(), retirementCalculatorInputDao.getCurrentIncome());
@@ -56,22 +67,33 @@ export default class RetirementCalculatorPage extends Page {
         await this.clickWhenVisible(this.maritalStatusRadioButton(retirementCalculatorInputDao.getMaritalStatus()));
         await this.setElementValue(this.socialSecurityOverride(), retirementCalculatorInputDao.getSocialSecurityOverride());
         logger.info("Form filled.");   
+        allureReporter.endStep();
         return this
     }
 
     public async clickOnCalculate() :Promise<this> {
-        await this.calculateButton().click();
+        await this.clickWhenVisible( this.calculateButton());
         return this;
+    }
+    public async isCanvasVisible(): Promise<boolean> {
+        return await this.isVisible(this.resultsChartGrapth());
+    }
+    public async isResultHeaderVisible(): Promise<boolean> {
+        return await this.isVisible(this.resultsHeader());
+    }
+    public async isInputAlertVisible(): Promise<boolean> {
+        return await this.isVisible(this.calculatorInputAlert());
+    }
+    public async getInputAlertText(): Promise<string> {
+        return  await this.getElementText(this.calculatorInputAlert()); 
     }
 
     public async openURL(): Promise<this> {
         logger.info("Opening the Retirement Calculator URL.");
         await this.open(this.retirementCalculatorPageutl);
         logger.info("Retirement Calculator URL opened successfully.");
-        await this.waitForPageLoad();
         return this;
     }
-
     public async acceptCookiesIfPresent() {
         logger.info("Checking for cookie banner.");
         if (await this.acceptCookiesButton().isExisting()) {

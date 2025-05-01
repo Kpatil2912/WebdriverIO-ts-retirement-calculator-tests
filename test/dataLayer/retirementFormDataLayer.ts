@@ -14,4 +14,5 @@ export interface RetirementFormDataLayer {
   preReturn: string;
   postReturn: string;
   maritalStatus :string;
+  inputAlertDesc :string;
 }

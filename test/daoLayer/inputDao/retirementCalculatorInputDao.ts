@@ -16,12 +16,14 @@ export class RetirementCalculatorInputDao {
   private readonly preReturn: string;
   private readonly postReturn: string;
   private readonly maritalStatus: string;
+  private readonly inputAlertDesc: string;
+
 
   constructor(data: RetirementFormDataLayer) {
     this.currentAge = data.currentAge;
     this.retirementAge = data.retirementAge;
     this.currentIncome = data.currentIncome ;
-    this.spouseIncome = data.spouseIncome ?? '';
+    this.spouseIncome = data.spouseIncome;
     this.savings = data.savings;
     this.contribution = data.contribution;
     this.increaseRate = data.increaseRate;
@@ -33,6 +35,8 @@ export class RetirementCalculatorInputDao {
     this.preReturn = data.preReturn;
     this.postReturn = data.postReturn;
     this.maritalStatus = data.maritalStatus;
+    this.inputAlertDesc = data.inputAlertDesc;
+
   }
 
   public getCurrentAge() { return this.currentAge; }
@@ -50,5 +54,6 @@ export class RetirementCalculatorInputDao {
   public getPreReturn() { return this.preReturn; }
   public getPostReturn() { return this.postReturn; }
   public getMaritalStatus() { return this.maritalStatus; }
+  public getInputAlertDesc() { return this.inputAlertDesc; }
 
 }

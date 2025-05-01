@@ -15,7 +15,8 @@
       "retirementYears": "20",
       "incomeDesired": "75",
       "preReturn": "8",
-      "postReturn": "5"
+      "postReturn": "5",
+      "inputAlertDesc" : "Please fill out all required fields"
     },
     "invalidAgeData": {
       "currentAge": "70",

@@ -43,6 +43,26 @@ export class Page {
     await element.click();
     
   }
+  async isVisible(
+    element: ChainablePromiseElement,
+  ): Promise<boolean> {
+    await element.scrollIntoView({ block: 'center' });
+    await element.waitForDisplayed({ });
+    return await element.isDisplayed();
+  }
+
+
+// Retrieves the text content of an element
+  async getElementText(element: ChainablePromiseElement): Promise<string> {
+    try {
+      await element.waitForDisplayed({ timeout: 5000 });
+      await element.scrollIntoView({ block: 'center' });
+      return await element.getText();
+    } catch (error) {
+      console.error(`Error retrieving text from element: ${error}`);
+      throw error;
+    }
+  }
 
   // Waits for the page to fully load
   async waitForPageLoad(timeout = 10000) {

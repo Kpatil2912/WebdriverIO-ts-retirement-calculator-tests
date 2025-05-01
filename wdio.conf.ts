@@ -85,7 +85,8 @@ export const config: WebdriverIO.Config = {
     // ],
     // // ,
      {
-        browserName: 'firefox'
+        browserName: 'firefox',
+        browserVersion: 'stable',
     }
      ],
 
