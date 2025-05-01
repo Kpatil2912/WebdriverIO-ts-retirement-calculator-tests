@@ -195,6 +195,7 @@ describe('Retirement Calculator - Form Validation Tests', () => {
           allureReporter.startStep('Test case started: should allow user to update default calculator values');
       
           // Test Logic
+            await retirementCalculatorPage.acceptCookies();
             await retirementCalculatorPage.fillDefaultValues(retirementCalculatorInputDao);
             await retirementCalculatorPage.clickDefaultValuesSaveChnagesButton();
             await (await retirementCalculatorPage.fillFormRequired(retirementCalculatorInputDao)).clickOnCalculate();

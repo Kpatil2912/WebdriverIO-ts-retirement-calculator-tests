@@ -214,7 +214,7 @@ export default class RetirementCalculatorPage extends Page {
     
     public async acceptCookies(): Promise<void> {
         try {
-          await this.acceptCookiesButton().waitForDisplayed({ timeout: 1500 });
+          await this.acceptCookiesButton().waitForDisplayed({ timeout: 2000 });
           await this.acceptCookiesButton().click();
           await this.acceptCookiesButton().waitForDisplayed({ timeout: 1000, reverse: true });
         } catch (error) {
