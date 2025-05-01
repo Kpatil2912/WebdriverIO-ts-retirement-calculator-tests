@@ -274,6 +274,7 @@ export const config: WebdriverIO.Config = {
     //     document.body.style.zoom = "70%";
     // });
     await browser.maximizeWindow();
+    await browser.deleteAllCookies();
 
     },
     /**

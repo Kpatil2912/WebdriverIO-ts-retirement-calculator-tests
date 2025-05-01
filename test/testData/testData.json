@@ -3,6 +3,8 @@
     "validData": {
       "currentAge": "40",
       "retirementAge": "68",
+      "lessRetirementAge" : "39",
+      "equalRetirementAge" : "40",
       "currentIncome": "100000",
       "spouseIncome": "75000",
       "savings": "500000",
@@ -10,18 +12,23 @@
       "increaseRate": "6",
       "socialSecurityBenfits": "yes",
       "noSocialSecurityBenfits": "no",
-      "maritalStatus" :"married",
+      "maritalStatus": "married",
       "socialSecurityOverride": "4000",
       "additionalIncome": "500",
       "retirementYears": "20",
       "incomeDesired": "75",
       "preReturn": "8",
       "postReturn": "5",
-      "inputAlertDesc" : "Please fill out all required fields"
-    },
-    "invalidAgeData": {
-      "currentAge": "70",
-      "retirementAge": "65"
+      "inputAlertDesc": "Please fill out all required fields",
+      "retirementAgeAlertDEsc": "Planned retirement age must be greater than current age",
+      "emptyValue" : "",
+      "otherIncomeDuringRetirement": "400",
+      "retirementIncomeDependantAge": "50",
+      "inflationLabel": "Yes",
+      "expectedInflationRate": "6",
+      "retirementAnnualIncome": "5",
+      "preRoiPercentage": "3",
+      "postRoiPercentage": "3"
     },
     "invalidTypeData": {
       "currentAge": "twenty",

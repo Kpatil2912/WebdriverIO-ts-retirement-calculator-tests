@@ -6,7 +6,7 @@ export interface RetirementFormDataLayer {
   savings: string;
   contribution: string;
   increaseRate: string;
-  socialSecurityBenfits :string;
+  socialSecurityBenfits: string;
   socialSecurityOverride: string;
   noSocialSecurityBenfits: string;
   additionalIncome: string;
@@ -14,6 +14,17 @@ export interface RetirementFormDataLayer {
   incomeDesired: string;
   preReturn: string;
   postReturn: string;
-  maritalStatus :string;
-  inputAlertDesc :string;
+  maritalStatus: string;
+  inputAlertDesc: string;
+  otherIncomeDuringRetirement: string;
+  retirementIncomeDependantAge: string;
+  inflationLabel: string;
+  expectedInflationRate: string;
+  retirementAnnualIncome: string;
+  preRoiPercentage: string;
+  postRoiPercentage: string;
+  emptyValue : string;
+  retirementAgeAlertDEsc : string;
+  lessRetirementAge : string ;
+  equalRetirementAge :string ;
 }
