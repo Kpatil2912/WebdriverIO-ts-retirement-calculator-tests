@@ -77,38 +77,16 @@ export const config: WebdriverIO.Config = {
         // },
 
 
-
-        // ],
-                // args: [
-                //     '--disable-infobars',
-                //     '--disable-extensions',
-                //     '--no-sandbox',
-                //     '--disable-gpu'
-                // ]
-    //         }
-    //     }
-    // ],
-    // // ,
-
-
-     {
-        browserName: 'firefox',
+     {  browserName: 'firefox',
         browserVersion: 'stable',
-        // maxInstances: 4, // Removed as it is not a valid property for RequestedStandaloneCapabilities
         'moz:firefoxOptions': {
-      args: [
-       // '-headless', // Run Firefox in headless mode for faster execution
-       // '--window-size=1920,1080', // Set browser window size
-        // '--disable-gpu', // Disable GPU acceleration
-        // '--no-sandbox', // Disable sandboxing (useful in CI environments)
-        // '--disable-extensions' // Disable browser extensions
-      ],
-      // Optional: Specify Firefox binary path if needed
-      // binary: '/path/to/firefox'
-    }
-    }
-
-
+          args: [
+          // '-headless', 
+           '--window-size=1920,1080', 
+            '--disable-gpu', 
+            '--no-sandbox', 
+            '--disable-extensions' 
+          ],}}
 
      ],
 
@@ -350,10 +328,10 @@ export const config: WebdriverIO.Config = {
                 addAttachment('Screenshot', image, contentType.PNG);
             }
     
-            if (fs.existsSync(videoPath)) {
-                const video = fs.readFileSync(videoPath);
-                addAttachment('Test Video', video, contentType.MP4); // Allure may preview only on supported viewers
-            }
+            // if (fs.existsSync(videoPath)) {
+            //     const video = fs.readFileSync(videoPath);
+            //     addAttachment('Test Video', video, contentType.MP4); // Allure may preview only on supported viewers
+            // }
             allure.endStep();
         });
     

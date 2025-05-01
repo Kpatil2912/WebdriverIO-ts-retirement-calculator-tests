@@ -91,8 +91,7 @@ export default class RetirementCalculatorPage extends Page {
     public async fillDefaultValues(retirementCalculatorInputDao: RetirementCalculatorInputDao): Promise<this> {
         logger.info("Filling the retirement calculator form with default values from DAO.");
         allureReporter.startStep('Filling the retirement calculator form with default values from DAO');
-
-        await this.clickWhenVisible(this.adjustDefaultValuesBtn())
+        await this.clickWhenVisible(this.adjustDefaultValuesBtn());
         await this.setElementValue(this.additionalIncome(), retirementCalculatorInputDao.getRetirementIncomeDependantAge());
         await this.setElementValue(this.retirementDuration(), retirementCalculatorInputDao.getRetirementIncomeDependantAge());
         await this.clickWhenVisible(this.inflationInclusionRadio(retirementCalculatorInputDao.getInflationLabel()));
@@ -100,7 +99,6 @@ export default class RetirementCalculatorPage extends Page {
         await this.setElementValue(this.retirementAnnualIncome(), retirementCalculatorInputDao.getRetirementAnnualIncome());
         await this.setElementValue(this.preRetirementRoi(), retirementCalculatorInputDao.getPreReturn());
         await this.setElementValue(this.postRetirementRoi(), retirementCalculatorInputDao.getPostReturn());
-
         logger.info("Default values filled from DAO.");
         allureReporter.endStep();
         return this;
@@ -116,8 +114,6 @@ export default class RetirementCalculatorPage extends Page {
     }
     public async setLessRetirementAge(retirementCalculatorInputDao: RetirementCalculatorInputDao) : Promise<this>{
         await this.setElementValue(this.retirementAge(), retirementCalculatorInputDao.getLessRetirementAge());
-
-
         await this.setElementValue(this.currentAge(), retirementCalculatorInputDao.getCurrentAge());
         await this.setElementValue(this.currentAnnualIncome(), retirementCalculatorInputDao.getCurrentIncome());
         await this.setElementValue(this.currentTotalSaving(), retirementCalculatorInputDao.getSavings());
@@ -125,13 +121,10 @@ export default class RetirementCalculatorPage extends Page {
         await this.setElementValue(this.savingsIncreaseRate(), retirementCalculatorInputDao.getIncreaseRate());
         await this.clickOnSocialBenefitsRadioButton(retirementCalculatorInputDao);
         await this.clickWhenVisible(this.maritalStatusRadioButton(retirementCalculatorInputDao.getMaritalStatus()));
-
-
         return this;
     }
     public async setEqualRetirementAge(retirementCalculatorInputDao: RetirementCalculatorInputDao) : Promise<this>{
         await this.setElementValue(this.retirementAge(), retirementCalculatorInputDao.getEqualRetirementAge());
-
         await this.setElementValue(this.currentAge(), retirementCalculatorInputDao.getCurrentAge());
         await this.setElementValue(this.currentAnnualIncome(), retirementCalculatorInputDao.getCurrentIncome());
         await this.setElementValue(this.currentTotalSaving(), retirementCalculatorInputDao.getSavings());
@@ -139,15 +132,12 @@ export default class RetirementCalculatorPage extends Page {
         await this.setElementValue(this.savingsIncreaseRate(), retirementCalculatorInputDao.getIncreaseRate());
         await this.clickOnSocialBenefitsRadioButton(retirementCalculatorInputDao);
         await this.clickWhenVisible(this.maritalStatusRadioButton(retirementCalculatorInputDao.getMaritalStatus()));
-
         return this;
     }
-
 
     public async fillForm(retirementCalculatorInputDao: RetirementCalculatorInputDao) : Promise<this> {
         logger.info("Filling the retirement calculator form with provided input data.");
         allureReporter.startStep('Filling the retirement calculator form with valid data');
-
         await this.setElementValue(this.currentAge(), retirementCalculatorInputDao.getCurrentAge());
         await this.setElementValue(this.retirementAge(), retirementCalculatorInputDao.getRetirementAge());
         await this.setElementValue(this.currentAnnualIncome(), retirementCalculatorInputDao.getCurrentIncome());
@@ -158,7 +148,6 @@ export default class RetirementCalculatorPage extends Page {
         await this.clickOnSocialBenefitsRadioButton(retirementCalculatorInputDao);
         await this.clickWhenVisible(this.maritalStatusRadioButton(retirementCalculatorInputDao.getMaritalStatus()));
         await this.setElementValue(this.socialSecurityOverride(), retirementCalculatorInputDao.getSocialSecurityOverride());
-
         logger.info("Form filled.");   
         allureReporter.endStep();
         return this
@@ -166,7 +155,6 @@ export default class RetirementCalculatorPage extends Page {
     public async fillFormRequired(retirementCalculatorInputDao: RetirementCalculatorInputDao) : Promise<this> {
         logger.info("Filling the retirement calculator form with provided input data.");
         allureReporter.startStep('Filling the retirement calculator form with valid data');
-
         await this.setElementValue(this.currentAge(), retirementCalculatorInputDao.getCurrentAge());
         await this.setElementValue(this.retirementAge(), retirementCalculatorInputDao.getRetirementAge());
         await this.setElementValue(this.currentAnnualIncome(), retirementCalculatorInputDao.getCurrentIncome());
@@ -175,7 +163,6 @@ export default class RetirementCalculatorPage extends Page {
         await this.setElementValue(this.savingsIncreaseRate(), retirementCalculatorInputDao.getIncreaseRate());
         await this.clickOnSocialBenefitsRadioButton(retirementCalculatorInputDao);
         await this.clickWhenVisible(this.maritalStatusRadioButton(retirementCalculatorInputDao.getMaritalStatus()));
-        
         logger.info("Form filled.");   
         allureReporter.endStep();
         return this
@@ -224,29 +211,10 @@ export default class RetirementCalculatorPage extends Page {
         logger.info("Retirement Calculator URL opened successfully.");
         return this;
     }
-    // public async acceptCookiesIfPresent(): Promise<void> {
-    //     logger.info("Checking for cookie banner.");
-    //     try {
-    //         const isButtonExisting = await this.acceptCookiesButton().isExisting();
-    //         if (isButtonExisting) {
-    //             const isButtonDisplayed = await this.acceptCookiesButton().isDisplayed();
-    //             if (isButtonDisplayed) {
-    //                 await this.acceptCookiesButton().click();
-    //                 logger.info("Cookies accepted successfully.");
-    //             } else {
-    //                 logger.info("Cookie banner button exists but is not visible.");
-    //             }
-    //         } else {
-    //             logger.info("No cookie banner found.");
-    //         }
-    //     } catch (error) {
-    //         logger.warn("Error while checking or interacting with the cookie banner: ", error);
-    //     }
-    // }
-
+    
     public async acceptCookies(): Promise<void> {
         try {
-          await this.acceptCookiesButton().waitForDisplayed({ timeout: 2000 });
+          await this.acceptCookiesButton().waitForDisplayed({ timeout: 1500 });
           await this.acceptCookiesButton().click();
           await this.acceptCookiesButton().waitForDisplayed({ timeout: 1000, reverse: true });
         } catch (error) {

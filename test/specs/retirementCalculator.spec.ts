@@ -23,8 +23,14 @@ describe('Retirement Calculator - Form Validation Tests', () => {
     // Page Objects Layer
     const retirementCalculatorPage: RetirementCalculatorPage = new RetirementCalculatorPage();
 
-    it('Should submit form with all required fields filled', async () => {
+    beforeAll(async () => {
+        await retirementCalculatorPage.openURL();
+        await retirementCalculatorPage.acceptCookies();
+    });
 
+    beforeEach(async () => { await retirementCalculatorPage.openURL();  });
+        
+    it('Should submit form with all required fields filled', async () => {
         //Report Setup
         logger.info('Test case started: should submit form with all required fields filled');
         allureReporter.addStory('Form Validation');
@@ -32,20 +38,18 @@ describe('Retirement Calculator - Form Validation Tests', () => {
         allureReporter.startStep('Test case started: should submit form with all required fields filled');
 
         // Test Logic
-        await ((await retirementCalculatorPage.openURL()).acceptCookies());
         await (await retirementCalculatorPage.fillFormRequired(retirementCalculatorInputDao)).clickOnCalculate();
 
         //Verification Layer
         allureReporter.startStep('Validating the results');
         expect(await retirementCalculatorPage.isCanvasVisible()).toBeTrue(); 
         expect(await retirementCalculatorPage.isResultHeaderVisible()).toBeTrue(); 
+        
         allureReporter.endStep();
-
         logger.info('Test case completed successfully: should submit form with all required fields filled');        
     });
 
     it('User should be able to submit form with all fields filled in', async () => {
-
          //Report Setup
         logger.info('Test case started: User should be able to submit form with all fields filled in');
         allureReporter.addStory('Form Validation');
@@ -53,42 +57,38 @@ describe('Retirement Calculator - Form Validation Tests', () => {
         allureReporter.startStep('Test case started: User should be able to submit form with all fields filled in');
 
         // Test Logic
-        await ((await retirementCalculatorPage.openURL()).acceptCookies());
         await (await retirementCalculatorPage.fillForm(retirementCalculatorInputDao)).clickOnCalculate();
 
         // Verification Layer
         allureReporter.startStep('Validating the results');
         expect(await retirementCalculatorPage.isCanvasVisible()).toBeTrue(); 
         expect(await retirementCalculatorPage.isResultHeaderVisible()).toBeTrue(); 
-        allureReporter.endStep();
 
+        allureReporter.endStep();
         logger.info('Test case completed successfully: User should be able to submit form with all fields filled in');        
     });
 
 
     it('Should display error when submitting form without filling required fields', async () => {
-
          //Report Setup
         logger.info('Test case started: should display error when submitting form without filling required fields');
         allureReporter.addStory('Form Validation');
         allureReporter.addSeverity('critical');
         allureReporter.startStep('Test case started: should display error when submitting form without filling required fields');
 
-        // Test Logic
-        await ((await retirementCalculatorPage.openURL()).acceptCookies());
+        // // Test Logic
         await retirementCalculatorPage.clickOnCalculate();
 
         // Verification Layer
         allureReporter.startStep('Validating the error messages');
         expect(await retirementCalculatorPage.isInputAlertVisible()).toBeTrue();
         expect(await retirementCalculatorPage.getInputAlertText()).toContain(validationRetirementFormData.inputAlertDesc);
-        allureReporter.endStep();
 
+        allureReporter.endStep();
         logger.info('Test case completed successfully: should display error when submitting form without filling required fields');
     });
 
     it('should hide Social Security Override input when toggle is set to No', async () => {
-
          //Report Setup
         logger.info('Test case started: should hide Social Security Override input when toggle is No');
         allureReporter.addStory('Form Validation');
@@ -96,7 +96,6 @@ describe('Retirement Calculator - Form Validation Tests', () => {
         allureReporter.startStep('Test case started: should hide Social Security Override input when toggle is No');
 
         // Test Logic
-        await (await (await retirementCalculatorPage.openURL()).acceptCookies());
         await retirementCalculatorPage.clickOnNoSocialBenefitsRadioButton(retirementCalculatorInputDao); 
         const isVisible = await retirementCalculatorPage.isOverrideVisible();
 
@@ -104,13 +103,12 @@ describe('Retirement Calculator - Form Validation Tests', () => {
         allureReporter.startStep('Validating that Social Security Override input is hidden');
         console.log(retirementCalculatorPage.isOverrideVisible());
         expect(isVisible).toBeFalse();
-        allureReporter.endStep();
 
+        allureReporter.endStep();
         logger.info('Test case completed successfully: should hide Social Security Override input when toggle is No');
     });
 
     it('should show Social Security Override input when toggle is set to Yes', async () => {
-
          //Report Setup
         logger.info('Test case started: should show Social Security Override input when toggle is Yes');
         allureReporter.addStory('Form Validation');
@@ -118,20 +116,18 @@ describe('Retirement Calculator - Form Validation Tests', () => {
         allureReporter.startStep('Test case started: should show Social Security Override input when toggle is Yes');
 
         // Test Logic
-        await (await retirementCalculatorPage.openURL()).acceptCookies();
         await retirementCalculatorPage.clickOnSocialBenefitsRadioButton(retirementCalculatorInputDao); 
         const isVisible = await retirementCalculatorPage.isOverrideVisible();
 
         // Verification Layer
         allureReporter.startStep('Validating that Social Security Override input is visible');
         expect(isVisible).toBeTrue();
-        allureReporter.endStep();
 
+        allureReporter.endStep();
         logger.info('Test case completed successfully: should show Social Security Override input when toggle is Yes');
     });
 
     it('should show error if Current Age is empty', async () => {
-
          //Report Setup
         logger.info('Test case started: should show error if Current Age is empty');
         allureReporter.addStory('Form Validation');
@@ -139,7 +135,6 @@ describe('Retirement Calculator - Form Validation Tests', () => {
         allureReporter.startStep('Test case started: should show error if Current Age is empty');
 
         // Test Logic
-        await (await retirementCalculatorPage.openURL()).acceptCookies();
         await retirementCalculatorPage.setEmptyCurrentAge(retirementCalculatorInputDao);
         await retirementCalculatorPage.clickOnCalculate();
 
@@ -147,13 +142,12 @@ describe('Retirement Calculator - Form Validation Tests', () => {
         allureReporter.startStep('Validating the error message for empty Current Age');
         const isVisible = await retirementCalculatorPage.isInvalidCurrentAgeErrorVisible();
         expect(isVisible).toBeTrue();
-        allureReporter.endStep();
 
+        allureReporter.endStep();
         logger.info('Test case completed successfully: should show error if Current Age is empty');
     });
 
     it('should show error if Retirement Age is less than Current Age', async () => {
-
          //Report Setup
         logger.info('Test case started: should show error if Retirement Age is less than or equal to Current Age');
         allureReporter.addStory('Form Validation');
@@ -161,7 +155,6 @@ describe('Retirement Calculator - Form Validation Tests', () => {
         allureReporter.startStep('Test case started: should show error if Retirement Age is less than or equal to Current Age');
 
         // Test Logic
-        await (await retirementCalculatorPage.openURL()).acceptCookies();
         await retirementCalculatorPage.setLessRetirementAge(retirementCalculatorInputDao);
         await retirementCalculatorPage.clickOnCalculate();
 
@@ -175,7 +168,6 @@ describe('Retirement Calculator - Form Validation Tests', () => {
     });
 
     it('should show error if Retirement Age is equal to Current Age', async () => {
-
          //Report Setup
         logger.info('Test case started: should show error if Retirement Age is less than or equal to Current Age');
         allureReporter.addStory('Form Validation');
@@ -183,7 +175,6 @@ describe('Retirement Calculator - Form Validation Tests', () => {
         allureReporter.startStep('Test case started: should show error if Retirement Age is less than or equal to Current Age');
 
         // Test Logic
-        await (await retirementCalculatorPage.openURL()).acceptCookies();
         await retirementCalculatorPage.setEqualRetirementAge(retirementCalculatorInputDao);
         await retirementCalculatorPage.clickOnCalculate();
 
@@ -197,7 +188,6 @@ describe('Retirement Calculator - Form Validation Tests', () => {
     });
 
     it('should allow user to update default calculator values and submit form', async () => {
-
          //Report Setup
           logger.info('Test case started: should allow user to update default calculator values');
           allureReporter.addStory('Form Submission');
@@ -205,7 +195,6 @@ describe('Retirement Calculator - Form Validation Tests', () => {
           allureReporter.startStep('Test case started: should allow user to update default calculator values');
       
           // Test Logic
-          await (await retirementCalculatorPage.openURL()).acceptCookies();
             await retirementCalculatorPage.fillDefaultValues(retirementCalculatorInputDao);
             await retirementCalculatorPage.clickDefaultValuesSaveChnagesButton();
             await (await retirementCalculatorPage.fillFormRequired(retirementCalculatorInputDao)).clickOnCalculate();
@@ -218,8 +207,8 @@ describe('Retirement Calculator - Form Validation Tests', () => {
           allureReporter.startStep('Validating the results');
           expect(await retirementCalculatorPage.isCanvasVisible()).toBeTrue(); 
           expect(await retirementCalculatorPage.isResultHeaderVisible()).toBeTrue(); 
+
           allureReporter.endStep();
-          
           logger.info('Test case completed successfully: should allow user to update default calculator values');
     });
 
