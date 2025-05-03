@@ -1,8 +1,7 @@
-import { browser } from '@wdio/globals'
+import { browser } from '@wdio/globals';
 import { ChainablePromiseElement } from 'webdriverio';
 
 export class Page {
-
   // Opens a specific URL path
   protected async open(path: string): Promise<this> {
     await browser.url(`${path}`);
@@ -10,48 +9,39 @@ export class Page {
   }
 
   // Sets the value of an input element
-  async setElementValue(
-    element: ChainablePromiseElement,
-    value: string,
-  ): Promise<void> {
+  async setElementValue(element: ChainablePromiseElement, value: string): Promise<void> {
     try {
-    await element.waitForEnabled({ timeout: 5000 });
-    await element.waitForClickable({ timeout: 5000 });
-    await element.scrollIntoView({ block: 'center' });
-    await element.click();
-    await element.clearValue(); 
-    await element.setValue(value);
+      await element.waitForEnabled({ timeout: 5000 });
+      await element.waitForClickable({ timeout: 5000 });
+      await element.scrollIntoView({ block: 'center' });
+      await element.click();
+      await element.clearValue();
+      await element.setValue(value);
     } catch (error) {
-    console.error(`Error setting value for element: ${error}`);
-    throw error; 
+      console.error(`Error setting value for element: ${error}`);
+      throw error;
     }
   }
-  
+
   // Clicks an element when it becomes visible and clickable
-  async clickWhenVisible(
-    element: ChainablePromiseElement,
-    timeout = 10000
-  ): Promise<void> {
+  async clickWhenVisible(element: ChainablePromiseElement, timeout = 10000): Promise<void> {
     await element.moveTo();
     await element.scrollIntoView({ block: 'center' });
     await element.waitForDisplayed({ timeout });
     await element.waitForClickable({ timeout });
     await element.click();
-    
   }
-  async isVisible(
-    element: ChainablePromiseElement,
-  ): Promise<boolean> {
+  async isVisible(element: ChainablePromiseElement): Promise<boolean> {
     try {
       await element.scrollIntoView({ block: 'center' });
-    await element.waitForDisplayed({ timeout : 1000});
+      await element.waitForDisplayed({ timeout: 1000 });
       return await element.isDisplayed();
-          } catch (error) {
-            return false;
-          }
+    } catch (error) {
+      return false;
+    }
   }
 
-// Retrieves the text content of an element
+  // Retrieves the text content of an element
   async getElementText(element: ChainablePromiseElement): Promise<string> {
     try {
       await element.waitForDisplayed({ timeout: 5000 });
@@ -68,9 +58,9 @@ export class Page {
     await browser.waitUntil(
       async () => (await browser.execute(() => document.readyState)) === 'complete',
       {
-      timeout,
-      timeoutMsg: 'Page did not finish loading in time'
+        timeout,
+        timeoutMsg: 'Page did not finish loading in time',
       }
     );
-    }
+  }
 }
