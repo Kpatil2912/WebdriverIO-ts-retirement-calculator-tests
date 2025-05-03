@@ -23,8 +23,8 @@ export interface RetirementFormDataLayer {
   retirementAnnualIncome: string;
   preRoiPercentage: string;
   postRoiPercentage: string;
-  emptyValue : string;
-  retirementAgeAlertDEsc : string;
-  lessRetirementAge : string ;
-  equalRetirementAge :string ;
+  emptyValue: string;
+  retirementAgeAlertDEsc: string;
+  lessRetirementAge: string;
+  equalRetirementAge: string;
 }

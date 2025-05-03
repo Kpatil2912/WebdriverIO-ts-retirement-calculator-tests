@@ -1,4 +1,4 @@
-import { RetirementFormDataLayer } from "../../dataLayer/retirementFormDataLayer";
+import { RetirementFormDataLayer } from '../../dataLayer/retirementFormDataLayer';
 
 export class RetirementCalculatorInputDao {
   private readonly currentAge: string;
@@ -26,7 +26,7 @@ export class RetirementCalculatorInputDao {
   private readonly preRoiPercentage: string;
   private readonly postRoiPercentage: string;
   private readonly emptyValue: string;
-  private readonly retirementAgeAlertDEsc: string; 
+  private readonly retirementAgeAlertDEsc: string;
   private readonly lessRetirementAge: string;
   private readonly equalRetirementAge: string;
 
@@ -56,37 +56,93 @@ export class RetirementCalculatorInputDao {
     this.preRoiPercentage = data.preRoiPercentage;
     this.postRoiPercentage = data.postRoiPercentage;
     this.emptyValue = data.emptyValue;
-    this.retirementAgeAlertDEsc = data.retirementAgeAlertDEsc; 
+    this.retirementAgeAlertDEsc = data.retirementAgeAlertDEsc;
     this.lessRetirementAge = data.lessRetirementAge;
     this.equalRetirementAge = data.equalRetirementAge;
   }
 
-  public getCurrentAge() { return this.currentAge; }
-  public getRetirementAge() { return this.retirementAge; }
-  public getCurrentIncome() { return this.currentIncome; }
-  public getSpouseIncome() { return this.spouseIncome; }
-  public getSavings() { return this.savings; }
-  public getContribution() { return this.contribution; }
-  public getIncreaseRate() { return this.increaseRate; }
-  public getSocialSecurityBenfits() { return this.socialSecurityBenfits; }
-  public getNoSocialSecurityBenfits() { return this.noSocialSecurityBenfits; }
-  public getSocialSecurityOverride() { return this.socialSecurityOverride; }
-  public getAdditionalIncome() { return this.additionalIncome; }
-  public getRetirementYears() { return this.retirementYears; }
-  public getIncomeDesired() { return this.incomeDesired; }
-  public getPreReturn() { return this.preReturn; }
-  public getPostReturn() { return this.postReturn; }
-  public getMaritalStatus() { return this.maritalStatus; }
-  public getInputAlertDesc() { return this.inputAlertDesc; }
-  public getOtherIncomeDuringRetirement() { return this.otherIncomeDuringRetirement; }
-  public getRetirementIncomeDependantAge() { return this.retirementIncomeDependantAge; }
-  public getInflationLabel() { return this.inflationLabel; }
-  public getExpectedInflationRate() { return this.expectedInflationRate; }
-  public getRetirementAnnualIncome() { return this.retirementAnnualIncome; }
-  public getPreRoiPercentage() { return this.preRoiPercentage; }
-  public getPostRoiPercentage() { return this.postRoiPercentage; }
-  public getEmptyValue() { return this.emptyValue; }
-  public getRetirementAgeAlertDesc() { return this.retirementAgeAlertDEsc; } 
-  public getLessRetirementAge() { return this.lessRetirementAge; }
-  public getEqualRetirementAge() { return this.equalRetirementAge; }
+  public getCurrentAge() {
+    return this.currentAge;
+  }
+  public getRetirementAge() {
+    return this.retirementAge;
+  }
+  public getCurrentIncome() {
+    return this.currentIncome;
+  }
+  public getSpouseIncome() {
+    return this.spouseIncome;
+  }
+  public getSavings() {
+    return this.savings;
+  }
+  public getContribution() {
+    return this.contribution;
+  }
+  public getIncreaseRate() {
+    return this.increaseRate;
+  }
+  public getSocialSecurityBenfits() {
+    return this.socialSecurityBenfits;
+  }
+  public getNoSocialSecurityBenfits() {
+    return this.noSocialSecurityBenfits;
+  }
+  public getSocialSecurityOverride() {
+    return this.socialSecurityOverride;
+  }
+  public getAdditionalIncome() {
+    return this.additionalIncome;
+  }
+  public getRetirementYears() {
+    return this.retirementYears;
+  }
+  public getIncomeDesired() {
+    return this.incomeDesired;
+  }
+  public getPreReturn() {
+    return this.preReturn;
+  }
+  public getPostReturn() {
+    return this.postReturn;
+  }
+  public getMaritalStatus() {
+    return this.maritalStatus;
+  }
+  public getInputAlertDesc() {
+    return this.inputAlertDesc;
+  }
+  public getOtherIncomeDuringRetirement() {
+    return this.otherIncomeDuringRetirement;
+  }
+  public getRetirementIncomeDependantAge() {
+    return this.retirementIncomeDependantAge;
+  }
+  public getInflationLabel() {
+    return this.inflationLabel;
+  }
+  public getExpectedInflationRate() {
+    return this.expectedInflationRate;
+  }
+  public getRetirementAnnualIncome() {
+    return this.retirementAnnualIncome;
+  }
+  public getPreRoiPercentage() {
+    return this.preRoiPercentage;
+  }
+  public getPostRoiPercentage() {
+    return this.postRoiPercentage;
+  }
+  public getEmptyValue() {
+    return this.emptyValue;
+  }
+  public getRetirementAgeAlertDesc() {
+    return this.retirementAgeAlertDEsc;
+  }
+  public getLessRetirementAge() {
+    return this.lessRetirementAge;
+  }
+  public getEqualRetirementAge() {
+    return this.equalRetirementAge;
+  }
 }
