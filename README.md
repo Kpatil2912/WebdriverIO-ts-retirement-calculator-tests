@@ -1,4 +1,4 @@
-# securian-retirement-calculator-tests
+# WebDriverIO-TS-retirement-calculator-tests
 
 Automated UI test suite for Securian's Retirement Savings Calculator using WebdriverIO and Jasmine. Developed as part of the ETQA Engineer Practical Interview Prework to demonstrate test automation best practices, including framework setup, test design, and validation of core calculator functionality.
 
@@ -53,7 +53,7 @@ npm test
 The project directory is organized as follows:
 
 ```
-SECURIAN-RETIREMENT-CALCULATOR-TESTS/
+WebDriverIO-TS-RETIREMENT-CALCULATOR-TESTS/
 ├── allure-results/          # Allure test report files
 ├── archive/                 # Archived test runs
 ├── logs/                    # Log files
